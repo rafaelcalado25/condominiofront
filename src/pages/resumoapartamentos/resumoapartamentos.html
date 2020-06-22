@@ -1,0 +1,75 @@
+
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="list-box"> </ion-icon>
+    </button>
+    <ion-title>Lista dos Apartamentos</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <consolidadoedificio></consolidadoedificio>
+  <div class="mensagemErro">{{mensagemErro}}</div>
+  <ion-list>
+    <ion-list-header>
+      <ion-label
+        ><h5><strong>Histórico</strong></h5></ion-label
+      >
+    </ion-list-header>
+
+    <ion-grid *ngFor="let ap of apartamentos; let i = index">
+        <ion-row>
+          <ion-col>
+              <h5>
+                  {{ i + 1 + " - " }}
+                  <strong class="titulo">{{
+                    ap.edificio + " Apartamento " + ap.numero
+                  }}</strong>
+                </h5>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div>
+                Proprietário:
+                <strong style="font-size:9pt;">{{ ap.pessoa.nome }}</strong>
+            </div>
+            <div *ngIf="ap.pessoa.telefones">
+                Telefone:
+                <strong style="font-size:9pt;">{{ ap.pessoa.telefones[0] }}</strong>
+                <strong *ngIf="ap.pessoa.telefones[1]" style="font-size:9pt;">, {{ ap.pessoa.telefones[1] }}</strong>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-8>
+              <ion-row *ngIf="ap.debitos > 0">
+                <div>
+                    Valor do Debito:
+                    {{ ap.debitos | currency: "BRL" }}
+                </div>
+              </ion-row>
+              <ion-row>
+                <div>
+                    Status:
+                    <strong class="statusVerde" *ngIf="ap.regularizado">Regular</strong>
+                    <strong class="statusVermelho" *ngIf="!ap.regularizado"
+                      >Irregular</strong
+                    >
+                </div>
+              </ion-row>
+            </ion-col>
+            <ion-col col-4>
+              <ion-row>
+                <div>
+                    <button ion-button clear small (click)="irApartamento(ap.mensalidades, ap)">
+                        Detalhar
+                      </button>
+                </div>
+              </ion-row>
+            </ion-col>
+        </ion-row>
+    </ion-grid>    
+  </ion-list>
+</ion-content>

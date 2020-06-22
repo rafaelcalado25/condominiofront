@@ -1,0 +1,99 @@
+
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="list-box"> </ion-icon>
+    </button>
+    <ion-title>Efetuar Baixas</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list radio-group [(ngModel)]="tpConsulta">
+    <ion-item>
+        <ion-label>Consulta por Apartamento ou Mês</ion-label>  
+    </ion-item> 
+    <ion-item>
+      <ion-label>Apartamento</ion-label>
+      <ion-radio value="apartamento" (ionSelect)="reset()"></ion-radio>
+    </ion-item>
+    <ion-item>
+        <ion-label>Mês</ion-label>
+        <ion-radio value="mes" (ionSelect)="reset()"x></ion-radio>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-list-header>
+      <ion-label
+        ><h5><strong>Pagamentos</strong></h5></ion-label
+      >
+    </ion-list-header>
+    
+    <ion-item>
+      <ion-label>Escolha o Ano</ion-label>
+      <ion-select
+        [(ngModel)]="anos"
+        okText="OK"
+        cancelText="Cancelar"
+        (ionChange)="anoEscolhido()"
+      >
+        <ion-option *ngFor="let ano of anosCons">{{ ano }}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="tpConsulta === 'mes'">
+      <ion-label>Escolha o Mês</ion-label>
+      <ion-select
+        [(ngModel)]="mesesEscolhidos"
+        multiple="true"
+        okText="OK"
+        cancelText="Cancelar"
+        (ionChange)="mesEscolhidos()"
+      >
+        <ion-option *ngFor="let mes of mesesHabilitados">{{ mes }}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="tpConsulta === 'apartamento'">
+        <ion-label>Escolha o Apartamento</ion-label>
+        <ion-select
+          [(ngModel)]="apartamentosEscolhidos"
+          multiple="true"
+          okText="OK"
+          cancelText="Cancelar"
+          (ionChange)="onApartamentosEscolhidos()"
+        >
+          <ion-option *ngFor="let ap of numerosAp">{{ ap }}</ion-option>
+        </ion-select>
+      </ion-item>
+  </ion-list>
+  <div class="row divConfirmarTudo">
+    <strong class="confirmarTudo">ESCOLHER TODOS</strong>
+    <ion-checkbox [(ngModel)]="escolherTodos" (ionChange)="onEscolherTodos($event)"></ion-checkbox>
+  </div>
+  
+  <ion-grid *ngFor="let m of mensalidadesEscolhidas; let i = index">
+    <ion-row>
+      <ion-col>
+        <h5><strong class="titulo">
+          Ap - {{m.mensalidade.numeroAp}} |
+          {{m.mensalidade.nomeProprietario}}
+        </strong></h5>
+      </ion-col>
+    </ion-row>
+    <ion-row class="linhaDados">
+      <ion-col>Vencimento: {{m.mensalidade.vencimento | date:'dd/MM/yy'}}</ion-col>
+      <ion-col>Valor: {{m.mensalidade.valor | currency:'BRL'}}</ion-col>      
+    </ion-row>
+    <ion-row>
+        <ion-col>
+          Confirmar Pagamento 
+        </ion-col>
+        <ion-col> 
+          <ion-checkbox [(ngModel)]="m.escolhido" 
+              ></ion-checkbox> 
+        </ion-col>       
+    </ion-row>
+  </ion-grid>
+  <div>
+    <button ion-button full (click)="presentConfirmBaixa()">EFETUAR BAIXA</button>
+  </div>
+</ion-content>

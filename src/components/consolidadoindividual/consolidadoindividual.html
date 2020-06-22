@@ -1,0 +1,16 @@
+<ion-grid >
+  <ion-row>
+    <ion-col class="colunaEstilo">
+        <ion-label class="labelEstilo">Total Pago este ano: {{ valorPago | currency: "BRL" }}</ion-label>        
+    </ion-col>
+  </ion-row>
+  <ion-row>
+      <ion-col col-8 class="colunaEstilo">
+          <ion-label class="labelEstilo" >Pagamentos em aberto {{ emAberto }}</ion-label>
+      </ion-col>
+      <ion-col col-4 class="colunaEstilo">
+          <button ion-button clear (click)="detalharEmAberto()" 
+          class="buttonEstilo" *ngIf="chave"> Detalhar</button>
+        </ion-col>
+    </ion-row>
+</ion-grid>

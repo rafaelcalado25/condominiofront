@@ -1,0 +1,22 @@
+
+<ion-content padding>
+  <h3>Bem vindo ao CondAPP! <br>
+    <strong class="teste"> Seu Apartamento no seu App</strong>
+  </h3>
+  <img src="../../assets/imgs/inicial.jpg" alt="Apartamento APP">
+
+  <form>
+    <ion-item>
+      <ion-label stacked>Username</ion-label>
+      <ion-input [(ngModel)]="credenciais.username" name="username" type="text" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Password</ion-label>
+      <ion-input [(ngModel)]="credenciais.password" name="username" type="password" ></ion-input>
+    </ion-item>
+    <button ion-button (click)="login()">Entrar</button>
+  </form>
+  <button ion-button outline>Registrar</button>
+  <p>
+  <div><a (click)=resetarSenha()>Resetar a senha</a></div>
+</ion-content>

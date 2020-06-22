@@ -1,0 +1,101 @@
+
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="list-box"> </ion-icon>
+    </button>
+    <ion-title>profile</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding *ngIf='!enableTelefone'>
+  <ion-label stacked>Ultima Alteração: {{ !usuario.registro? '':usuario.registro.modificadoem | date:'dd/MM/yyyy HH:mm'}}</ion-label>
+  <ion-card >
+
+    <ion-card-header>
+      <h2>Dados Gerais</h2> 
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-list>
+
+        <ion-item>
+          <ion-label stacked>Username</ion-label>
+          <ion-input type="text" disabled='true' [ngModel] = 'usuario.username'></ion-input>
+        </ion-item>
+      
+        <ion-item>
+          <ion-label stacked>E-mail</ion-label>
+          <ion-input type="text" [(ngModel)] = 'usuario.email'></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>CPF</ion-label>
+          <ion-input type="text" [(ngModel)] = 'usuario.cpf'></ion-input>
+        </ion-item>
+      
+        <ion-item>
+          <ion-label stacked>Nome Completo</ion-label>
+          <ion-input type="text" [(ngModel)] = 'usuario.nome'></ion-input>
+        </ion-item>
+        
+          
+        <ion-item>
+          <ion-list>
+            <ion-list-header>
+              <ion-icon name="call" item-start></ion-icon> Telefones
+              <ion-icon name="add" item-end (click)="addPhone()"></ion-icon>
+            </ion-list-header>
+            <ion-item *ngFor='let t of usuario.telefones; let i=index' >{{t}}
+              <button (click)="eliminarTelefone(i)" >
+                <span >X</span>
+              </button>
+            </ion-item>
+          </ion-list>
+        </ion-item>
+        
+      </ion-list>
+    </ion-card-content>
+    <button ion-button block (click)="atualizarProfile()">Atualizar Perfil</button>
+  </ion-card>
+  <ion-card>
+
+    <ion-card-header>
+      Trocar de senha
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label floating>Senha Atual</ion-label>
+          <ion-input type="password" [(ngModel)] = "senhaAtual"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Nova Senha</ion-label>
+          <ion-input type="password" [(ngModel)] = "senhaNova"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Confirmação de Senha</ion-label>
+          <ion-input type="password" [(ngModel)] = "confirmacaoSenha"></ion-input>
+        </ion-item>      
+      </ion-list>
+    </ion-card-content>
+    <button ion-button block (click)="atualizarSenha()">Trocar Senha</button>
+  </ion-card>
+</ion-content>
+
+<ion-content   *ngIf='enableTelefone'>
+  <ion-card >  
+    <ion-card-content>
+      <ion-label stacked>t</ion-label>
+
+      <ion-label stacked>Telefones Cadastros</ion-label>
+      <ion-input type="text" disabled='true'
+      *ngFor='let t of usuario.telefones' [value] = 't'></ion-input>
+
+      <ion-label stacked>Insira o número</ion-label>
+      <ion-input type="number" [(ngModel)]= "novoTelefone"></ion-input>
+      <button ion-button round (click)="inserirTelefone()">Inserir</button>
+      <button ion-button round (click)="dismissTelefone()">Fechar</button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

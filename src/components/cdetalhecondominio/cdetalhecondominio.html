@@ -1,0 +1,40 @@
+<!-- Generated template for the CdatalhecondominioComponent component -->
+
+<div>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title >Condominio {{mensalidade.mes + '/' + mensalidade.ano}}           
+
+      </ion-card-title>      
+      <button ion-button color="light" round small (click)="esconder()"> Voltar</button>
+    </ion-card-header>
+    <ion-card-content>      
+        <ion-label>Edificio: {{apartamento?apartamento.edificio:''}}</ion-label>
+        <ion-label>Apartamento: {{apartamento?apartamento.numero:''}}</ion-label>
+        <div class="row">
+            <ion-label>Regularizado: {{apartamento?apartamento.regularizado?'SIM':'NÃO':''}}</ion-label>
+            <ion-label *ngIf="apartamento && !apartamento.regularizado">({{apartamento? apartamento.debitos :''}})</ion-label>        
+        </div>
+        <ion-label>Vencimento: {{mensalidade.vencimento | date:'dd/MM/yyyy'}}</ion-label>
+          <ion-label>Pagamento: {{mensalidade.pagamento | date:'dd/MM/yyyy'}}</ion-label>
+          <div class="row">
+              <ion-label>Status: {{mensalidade.aberto?'Aberto':'Pago'}} </ion-label>
+              <ion-label>Valor: {{mensalidade.valor | currency:'BRL'}}</ion-label>
+          </div>
+        
+        <div>
+          <ion-label>Protocolo Sinalização: {{protocoloSinalizar}}</ion-label>
+        </div>
+        <div *ngIf="mensalidade.pagamento">
+            <button ion-button full (click)="comprovante()"> Visualizar Comprovante</button>
+          </div> 
+          <div *ngIf='!pagamentoSinalizado && !mensalidade.pagamento'>
+            <button ion-button full (click)="sinalizarPagamento()" >Sinalizar Pagamento</button>
+          </div>
+          <div > 
+            <button ion-button full *ngFor="let doc of documentos;"
+            (click)="visualizarTaxaExtra(doc.id)"> Visualizar Taxa Extra</button>
+          </div>     
+    </ion-card-content>
+  </ion-card>
+</div>

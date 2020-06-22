@@ -14,3 +14,55 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+  
+  
+  .exercicio {
+    font-size: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+  .right{
+    position: relative;
+    float: right;
+    align-self: auto;
+  }
+  .left{
+    position: relative;
+    float: left;
+    align-self: flex-end;
+  }
+  .statusVerde {
+    font-size: 16px;
+    font-weight: bolder;
+    color: green;    
+  }
+  .statusVermelho{
+    font-size: 16px;
+    font-weight: bolder;
+    color: red;    
+  }
+  .suscessoToast {
+    div {
+      background-color: rgb(9, 184, 62);
+    }      
+  }
+  .erroToast {
+    div {
+      background-color: rgb(240, 70, 70);
+    }      
+  }
+  .warningToast {
+    div {
+      background-color: rgb(225, 245, 47);
+    }      
+  }
+  .mensagemErro {
+    div {
+      background-color: red;      
+    }
+    
+    
+  }
+  .toast-container{ background:red; } .toast-md .toast-message{ 
+    color: black; 
+    font-family: Helvetica, Arial, sans-serif;
+  }

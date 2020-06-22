@@ -9,6 +9,10 @@
     <ion-list>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
+        <ion-item-group submenu *ngIf="p.subPages">
+            <ion-item submenu-item *ngFor="let s of p.subPages">{{s.title}}</ion-item>
+            
+        </ion-item-group>
       </button>
     </ion-list>
   </ion-content>

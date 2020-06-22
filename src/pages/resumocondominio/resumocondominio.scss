@@ -1,0 +1,33 @@
+page-resumocondominio {
+  
+  h5 {
+    text-align: center;   
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    size: 10px;
+  }
+  
+  .exercicio {
+    font-size: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+  .right{
+    position: relative;
+    float: right;
+    align-self: auto;
+  }
+  .left{
+    position: relative;
+    float: left;
+    align-self: flex-end;
+  }
+  .statusVerde {
+    font-size: 16px;
+    font-weight: bolder;
+    color: green;    
+  }
+  .statusVermelho{
+    font-size: 16px;
+    font-weight: bolder;
+    color: red;    
+  }
+}

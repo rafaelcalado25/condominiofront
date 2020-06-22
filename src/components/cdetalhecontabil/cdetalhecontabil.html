@@ -1,0 +1,42 @@
+<!-- Generated template for the CdetalhecontabilComponent component -->
+<div>
+  <ion-card>
+    <ion-card-header>
+      Balanço do Mês {{mesCorrente}}/{{anoCorrente}}
+    </ion-card-header>
+    <ion-card-content>
+      <ion-label>Saldo geral do balanço R$ {{saldo}}</ion-label>   
+      <ion-item-group>
+        <ion-item-divider color="secondary">Receita</ion-item-divider>
+          <div>
+            <ion-list>
+              <ion-item *ngFor= "let l of lancamentosCorrenteCredito">               
+                <h2>{{l.rubrica.nome.nome}}</h2>
+                <h3>Descrição  {{l.rubrica.descricao}}</h3>
+                <h3>Valor =  {{l.valorEfetivado | currency:'BRL'}}</h3>
+                <p>Data de pagamento{{l.efetivacao | date:'dd/MM/yyyy'}}<br>
+                Fonte: {{l.mensalidade && l.mensalidade.apartamento? 
+                  'Apartamento: ' + l.mensalidade.apartamento.numero :(
+                  (l.controle && l.controle.apartamento)? 
+                  'Apartamento: ' +l.controle.apartamento.numero :'Outro')
+                }}</p><br>
+                <div align="center">--------------------------------</div>
+              </ion-item>
+            </ion-list>
+          </div>
+        
+        <ion-item-divider color="danger">Despesa</ion-item-divider>
+        <div>
+          <ion-list>
+            <ion-item *ngFor= "let l of lancamentosCorrenteDebito">               
+              <h2>{{l.rubrica.nome.nome}}</h2>
+              <h3>Valor = {{l.valorEfetivado | currency:'BRL'}}</h3>
+              <p>Date de pagamento {{l.efetivacao | date:'dd/MM/yyyy'}}</p><br>
+              <div align="center">--------------------------------</div>
+            </ion-item>
+          </ion-list>
+        </div>
+      </ion-item-group>
+    </ion-card-content>
+  </ion-card>
+</div>

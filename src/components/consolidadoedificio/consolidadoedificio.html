@@ -1,0 +1,48 @@
+<ion-grid>
+  <ion-row>
+    <ion-col class="colunaEstilo" col-5> </ion-col>
+    <ion-col col-3 >
+      <ion-label class="labelEstilo" [tooltip]="teste" positionV="bottom" arrow>Mês </ion-label>
+    </ion-col>
+    <ion-col col-4>
+      <ion-label class="labelEstilo">Ano </ion-label>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-5>
+      <ion-label class="labelEstilo">Total de Pagamentos: </ion-label>
+    </ion-col>
+    <ion-col col-3>
+      <ion-label class="labelEstilo"
+        >{{ valorMesCorrente | currency: "BRL" }}
+      </ion-label>
+    </ion-col>
+    <ion-col col-4>
+      <ion-label class="labelEstilo"
+        >{{ valorAnoCorrente | currency: "BRL" }}
+      </ion-label>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-5>
+      <ion-label class="labelEstilo">Total de Pendências: </ion-label>
+    </ion-col>
+    <ion-col col-3>
+      <ion-label class="labelEstilo"
+        >{{ valorPendenciaMesCorrente | currency: "BRL" }}
+      </ion-label>
+    </ion-col>
+    <ion-col col-4>
+      <ion-label class="labelEstilo"
+        >{{ valorPendenciaAnoCorrente | currency: "BRL" }}
+      </ion-label>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-4 class="colunaEstilo">
+      <button ion-button clear class="buttonEstilo"
+      >Detalhar</button>
+      
+    </ion-col>
+  </ion-row>
+</ion-grid>

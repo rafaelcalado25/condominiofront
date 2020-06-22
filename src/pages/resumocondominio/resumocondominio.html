@@ -1,0 +1,58 @@
+
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="list-box">
+      </ion-icon>
+    </button>
+    <ion-title>Apartamento {{apartamento?apartamento.numero:""}}</ion-title>
+  </ion-navbar>  
+</ion-header>
+
+<ion-content padding>
+  <consolidadoindividual [valorPago]="valorTotalPago" 
+    [emAberto]="emAberto" (mostarAbertos)="onMostrarAberto($event)"
+    [chave]="chave"></consolidadoindividual>
+    <div *ngIf="chave">    
+          
+      <ion-list>
+        <ion-list-header>
+          <ion-label><h5><strong>Histórico</strong></h5></ion-label>
+        </ion-list-header>
+        <ion-item>
+          <ion-label>Escolha o Ano</ion-label>
+          <ion-select [(ngModel)]="anos" multiple="true" 
+            okText="OK" cancelText="Cancelar" (ionChange)="atualizarLista()">
+            <ion-option *ngFor="let ano of anosCons">{{ano}}</ion-option>            
+          </ion-select>
+        </ion-item>
+        <ion-item *ngFor="let mensalidade of mensalidadesFiltradas; let i = index;">
+            <h3>{{(i+1) + ' - '}} 
+              <strong class="exercicio">{{ filtrar(mensalidade.mes)  + '/'+mensalidade.ano}}</strong>
+            </h3>
+          <div class="col-md-12">
+            <div class="left col-md-8">
+              Valor:  
+              {{mensalidade.valor | currency:'BRL'}} <br>
+              Vencimento: {{mensalidade.vencimento | date: 'dd/MM/yyyy'}}<br>
+              Status: 
+              <strong class="statusVerde" *ngIf="!mensalidade.aberto">{{mensalidade.aberto ? 'Aberto':'Pago'}}</strong>
+              <strong class="statusVermelho" *ngIf="mensalidade.aberto">{{mensalidade.aberto ? 'Aberto':'Pago'}}</strong><br>
+              Data de geração: {{ data}}<br>
+            </div>
+            <div class="right col-md-4">
+              <button ion-button clear (click)="detalhar(mensalidade)">Detalhar</button></div>  
+        </div>        
+        </ion-item>
+        
+      </ion-list>
+    </div>
+    <div *ngIf="!chave">
+      <cdetalhecondominio (chave)="onChave($event)" 
+        [mensalidade]="mensalidade" [apartamento]="apartamento"
+        [pagamentoSinalizado]="pagamentoSinalizado"
+        [protocoloSinalizar]="protocoloSinalizarPagamento"
+        [documentos]="documentos"></cdetalhecondominio>
+    </div>
+
+</ion-content>
